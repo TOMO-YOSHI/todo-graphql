@@ -9,3 +9,14 @@ export const GET_TASKS = gql`
         }
     }
 `
+
+export const ADD_TASK = gql`
+mutation AddTask($id: String!, $task: String!, $date: String!)
+{
+  addTask(id: $id, task: $task, date:$date) {
+    id
+    task
+    date
+  }
+}
+`
