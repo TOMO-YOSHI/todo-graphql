@@ -20,3 +20,14 @@ mutation AddTask($id: String!, $task: String!, $date: String!)
   }
 }
 `
+
+export const REMOVE_TASK = gql`
+mutation RemoveTask($id: String!) 
+{
+  removeTask(id: $id) {
+    id
+    task
+    date
+  }
+}
+`
