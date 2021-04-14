@@ -25,12 +25,39 @@ const typeDefs = gql`
         task(id: String!): Task
         tasks: [Task]
     }
+
+    type Mutation {
+        addTask(id: String!, task: String!, date: String!): Task
+        removeTask(id: String!): Task
+    }
 `
 
 const resolvers = {
     Query: {
         tasks: () => tasks,
         task(parent, args, context, info) {return find(tasks, { id: args.id })}
+    },
+    Mutation: {
+        addTask: (root, {id, task, date}) => {
+            const newTask = {
+                id: id,
+                task: task,
+                date: date
+            };
+            tasks.push(newTask)
+            return newTask;
+        },
+        removeTask: (root, {id}) => {
+            const removedTask = find(tasks, { id: id });
+            if(!removedTask) {
+                throw new Error(`Couldn't find task with id ${id}`);
+            };
+
+            remove(tasks, task => {
+                return task.id === removedTask.id;
+            });
+            return removedTask;
+        }
     }
 };
 
