@@ -19,7 +19,7 @@ const Tasks = () => {
 
     const styles = getStyles();
 
-    console.log('data', data.tasks)
+    // console.log('data', data.tasks)
 
     return (
         <List grid={{ gutter: 20, column: 1 }} style={styles.list}>

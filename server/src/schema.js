@@ -11,6 +11,11 @@ const tasks = [
         id: '2',
         task: 'Shopping',
         date: '2021/04/20'
+    },
+    {
+        id: '3',
+        task: 'Studying',
+        date: '2021/04/25'
     }
 ]
 
@@ -28,6 +33,7 @@ const typeDefs = gql`
 
     type Mutation {
         addTask(id: String!, task: String!, date: String!): Task
+        updateTask(id: String!, task: String!, date: String!): Task
         removeTask(id: String!): Task
     }
 `
@@ -46,6 +52,16 @@ const resolvers = {
             };
             tasks.push(newTask)
             return newTask;
+        },
+        updateTask: (root, {id, task, date}) => {
+            const exTask = find(tasks, {id: id});
+            if(!task) {
+                throw new Error(`Couldn't find task with id ${args.id}`)
+            }
+
+            exTask.task = task;
+            exTask.date = date;
+            return exTask
         },
         removeTask: (root, {id}) => {
             const removedTask = find(tasks, { id: id });
