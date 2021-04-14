@@ -25,8 +25,8 @@ const Tasks = () => {
         <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
             {
                 data.tasks.map((item, index)=>
-                    <List.Item>
-                        <Task key={item.id} id={item.id} task={item.task} date={item.date} />
+                    <List.Item key={item.id}>
+                        <Task id={item.id} task={item.task} date={item.date} />
                     </List.Item>
                 )
             }
